@@ -45,7 +45,8 @@ body{
     color:green;
 }
 .navbar-toggler{
-       background-color: red;
+       background-color: white;
+       color:white;
 }
 .fa-snowflake{
     transition: all linear;
