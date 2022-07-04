@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   {{> headerlinks}}
+</head>
+
+<body>
+
+    {{> navbar}}
+
+
+    <!-- main header -->
+    <div class="container-fluid main_header">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                <div class="main_content">
+                    <form class="temp_form">
+                        <input type="text", id="cityname" placeholder="enter your city name" autocomplete="off">
+                        <input type="submit" value="search" id="submitBtn">
+                    </form>
+                </div>
+            
+
+            <div class="tempinfo">
+                <div class="top_layer">
+                    <p id="day">day.now()</p>
+                    <p id="today_date">date.now()</p>
+                </div>
+                <div class="main_layer">
+                    <p id="city_name"> Get Output here</p>
+                    <div class="middle_layer data_hide">
+                        <p id="temp"><span>0</span> <sup>o</sup>C</p>
+                        <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- footer  -->
+    {{>footer}}
+
+    <script>
+ const cityname = document.getElementById('cityname');
+const submitBtn = document.getElementById('submitBtn');
+const city_name = document.getElementById('city_name');
+const temp=document.getElementById('temp');
+const temp_status=document.getElementById('temp_status');
+const getInfo = async(event)=>{
+    event.preventDefault();
+    let cityVal=cityname.value;
+    if(cityVal===""){
+      city_name.innerText='plz enter  name before search';
+    }
+    else
+    {
+        try{
+            let url=`https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&units=metric&appid=192fc6c8371138e283fcdc7bdbdb18d1`;
+            const response  = await fetch(url);
+            const data=await response.json();
+            console.log(data);
+            const arrData=[data];
+            city_name.innerText=`${arrData[0].name},${arrData[0].sys.country}`;
+            temp.innerText=arrData[0].main.temp;
+            const temp_status=arrData[0].weather[0].main;
+        }
+        catch{
+            city_name.innerText='plz enter  correct name';
+        }
+    }
+}
+    submitBtn.addEventListener('click',getInfo);
+
+
+
+    </script>
+</body>
+</head>
