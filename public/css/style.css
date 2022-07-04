@@ -116,6 +116,14 @@ body{
 /* 
 weather css */
 
+#day{
+    color:whitesmoke;
+    font-size: xx-large;
+}
+#today_date{
+    color:whitesmoke;
+    font-size: xx-large;
+}
 .temp_form{
     width:60%;
     position: relative;
