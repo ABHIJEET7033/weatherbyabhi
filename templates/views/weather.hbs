@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-   {{> headerlinks}}
+    {{> headerlinks}}
 </head>
 
 <body>
@@ -16,25 +16,25 @@
             <div class="col-md-10 col-12 mx-auto">
                 <div class="main_content">
                     <form class="temp_form">
-                        <input type="text", id="cityname" placeholder="enter your city name" autocomplete="off">
+                        <input type="text" , id="cityName" placeholder="Enter your city name" autocomplete="off">
                         <input type="submit" value="search" id="submitBtn">
                     </form>
                 </div>
-            
 
-            <div class="tempinfo">
-                <div class="top_layer">
-                    <p id="day">day.now()</p>
-                    <p id="today_date">date.now()</p>
-                </div>
-                <div class="main_layer">
-                    <p id="city_name"> Get Output here</p>
-                    <div class="middle_layer data_hide">
-                        <p id="temp"><span>0</span> <sup>o</sup>C</p>
-                        <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+
+                <div class="tempInformation">
+                    <div class="top_layer">
+                        <p id="day">tuesday</p>
+                        <p id="today_date">13oct</p>
+                    </div>
+                    <div class="main_layer">
+                        <p id="city_name"> Get Output here</p>
+                        <div class="middle_layer data_hide">
+                            <p id="temp"><span>0</span> <sup>o</sup>C</p>
+                            <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
 
         </div>
@@ -43,39 +43,57 @@
     <!-- footer  -->
     {{>footer}}
 
+    <script src="js/main.js"></script>
     <script>
- const cityname = document.getElementById('cityname');
-const submitBtn = document.getElementById('submitBtn');
-const city_name = document.getElementById('city_name');
-const temp=document.getElementById('temp');
-const temp_status=document.getElementById('temp_status');
-const getInfo = async(event)=>{
-    event.preventDefault();
-    let cityVal=cityname.value;
-    if(cityVal===""){
-      city_name.innerText='plz enter  name before search';
-    }
-    else
-    {
-        try{
-            let url=`https://api.openweathermap.org/data/2.5/weather?q=${cityVal}&units=metric&appid=192fc6c8371138e283fcdc7bdbdb18d1`;
-            const response  = await fetch(url);
-            const data=await response.json();
-            console.log(data);
-            const arrData=[data];
-            city_name.innerText=`${arrData[0].name},${arrData[0].sys.country}`;
-            temp.innerText=arrData[0].main.temp;
-            const temp_status=arrData[0].weather[0].main;
-        }
-        catch{
-            city_name.innerText='plz enter  correct name';
-        }
-    }
-}
-    submitBtn.addEventListener('click',getInfo);
+
+        const getCurrentDay = () => {
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
 
 
+            let currentTime = new Date();
+            days = weekday[currentTime.getDay()];
+            let day = document.getElementById('day');
+            day.innerText = days;
+
+        };
+        getCurrentDay();
+    </script>
+        
+    <script>
+
+      const getCurrentDate = () => {
+
+             let month =new Array(12);
+             month[0] = "Jan";
+             month[1]= "Feb";
+             month[2]= "Mar";
+             month[3]= "Apr";
+             month[4]= "May";
+             month[5]= "Jun";
+             month[6]= "Jul";
+             month[7]= "Aug";
+             month[8]= "Sep";
+             month[9]= "Oct";
+             month[10]= "Nov";
+             month[11]= "Dec";
+ 
+            var now=new Date();
+             var A = month[now.getMonth()];
+             var D=now.getDate();
+            let todaydate = document.getElementById('today_date');
+            todaydate.innerText = D+"  "+A;
+};
+       getCurrentDate();
+     
 
     </script>
 </body>
-</head>
+</html>
