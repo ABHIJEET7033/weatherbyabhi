@@ -232,7 +232,7 @@ sup{
 }
 
 .data_hide{
-    visibility: visible;
+    display: none;
     transition: all 0.3s linear;
 }
 
